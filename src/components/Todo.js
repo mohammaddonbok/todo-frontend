@@ -65,16 +65,16 @@ function Todo(props) {
   return (
     <div className='Todo'>
     <p>{props.task.title}</p>
-    <div>
+    <div name="list">
         <FontAwesomeIcon icon={faEye} onClick={()=>handleDetailsOpen()}/>
-        <FontAwesomeIcon icon={faPenToSquare} className='fa-pen' onClick={()=>handleClickOpen()}/>
+        <FontAwesomeIcon icon={faPenToSquare} className='fa-pen' name="edit" onClick={()=>handleClickOpen()}/>
         <FontAwesomeIcon icon={faTrash} onClick={(e)=> deleteTask(e,props.task._id)}/>
         <Dialog open={open} onClose={handleClose}>
         <DialogTitle >Update Task</DialogTitle>
         <DialogContent>
         <TextField
             margin="dense"
-            id="title"
+            id="updateTitle"
             label="Task Title"
             type="text"
             fullWidth
@@ -86,7 +86,7 @@ function Todo(props) {
           />
           <TextField
             margin="dense"
-            id="description"
+            id="updateDescription"
             label="Description"
             type="text"
             fullWidth
@@ -102,6 +102,7 @@ function Todo(props) {
           onClick={()=> setUpdatedTask({...updatedTask,state:"toDo"})}
           >To Do</Button>
           <Button variant="contained"
+            name="inProgress"
            disabled ={updatedTask.state === "inProgress" ? true : false}
            onClick={()=> setUpdatedTask({...updatedTask,state:"inProgress"})}
           >In Progress</Button>
@@ -113,7 +114,7 @@ function Todo(props) {
         </DialogContent>
         <DialogActions >
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={(e)=>handleUpdate(e)}>Update</Button>
+          <Button name="update" onClick={(e)=>handleUpdate(e)}>Update</Button>
         </DialogActions>
       </Dialog>
       <div>
